@@ -1,0 +1,42 @@
+CREATE TABLE  "ADMIN" 
+   (	"ID_USER" VARCHAR2(25) NOT NULL ENABLE, 
+	"USERNAME" VARCHAR2(25), 
+	"PASSWORD" VARCHAR2(25), 
+	"TELP" NUMBER(25,1), 
+	 CONSTRAINT "ADMIN_PK" PRIMARY KEY ("ID_USER") ENABLE
+   ) ;
+
+CREATE OR REPLACE TRIGGER  "BI_ADMIN" 
+  before insert on "ADMIN"               
+  for each row  
+begin   
+  if :NEW."ID_USER" is null then 
+    select "ADMIN_SEQ".nextval into :NEW."ID_USER" from dual; 
+  end if; 
+end; 
+
+/
+ALTER TRIGGER  "BI_ADMIN" ENABLE;
+
+
+CREATE TABLE  "PRODUK" 
+   (	"ID_PRODUK" VARCHAR2(25) NOT NULL ENABLE, 
+	"JENISPRODUK" VARCHAR2(50), 
+	"NAMAPRODUK" VARCHAR2(50), 
+	"HARGAPRODUK" NUMBER(25,1), 
+	 CONSTRAINT "PRODUK_PK" PRIMARY KEY ("ID_PRODUK") ENABLE
+   ) ;
+
+CREATE OR REPLACE TRIGGER  "BI_PRODUK" 
+  before insert on "PRODUK"               
+  for each row  
+begin   
+  if :NEW."ID_PRODUK" is null then 
+    select "PRODUK_SEQ".nextval into :NEW."ID_PRODUK" from dual; 
+  end if; 
+end; 
+
+/
+ALTER TRIGGER  "BI_PRODUK" ENABLE;
+
+
